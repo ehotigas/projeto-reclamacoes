@@ -1,4 +1,4 @@
-#!/usr/bin/server python
+#!/usr/bin/env python
 # coding: utf-8
 
 from models.SharePointMonitor import *
