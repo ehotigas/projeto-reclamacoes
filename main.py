@@ -1,8 +1,8 @@
-from models.SharePointMonitor import *
-from models.ReadCSV import ReadCSV
 from os import system
 import json
-
+system('.\\server\\Scripts\\activate')
+from models.SharePointMonitor import *
+from models.ReadCSV import ReadCSV
 
 header_types = {
     # 'vertrag': 'number',
@@ -62,5 +62,4 @@ def main() -> None:
     
             
 if __name__ == '__main__':
-    system('.\\server\\Scripts\\activate')
     main()
