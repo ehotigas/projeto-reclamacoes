@@ -15,7 +15,7 @@ class ReadCSV:
     
     
     def read(self) -> None:
-        with open(self.path) as file:
+        with open(self.path, encoding='utf-8') as file:
             
             reader = csv.reader(file, delimiter=self.delimiter)
             cont = -1

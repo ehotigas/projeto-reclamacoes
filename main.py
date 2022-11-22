@@ -1,6 +1,6 @@
 from os import system
 import json
-system('./serv/Scripts/activate')
+system('./server/Scripts/activate')
 from models.SharePointMonitor import *
 from models.ReadCSV import ReadCSV
 
