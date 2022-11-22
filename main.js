@@ -15,7 +15,7 @@ function withColumn(data, column, value, condition=false) {
 
 
 // Subprocess
-let csv = { header: [], dados: [] };
+let csv = { header: [], dados: [{ id: '1', anlage: 'teste', ClasseTxt: 'teste', city1: 'teste', Subgrupo: 'teste', Modalidade: 'teste' }] };
 const python = spawn('python', ['main.py']);
 python.stdout.on('data', data => {
     let stringData = String(data), temp_csv = { header: {  }, dados: [] };
