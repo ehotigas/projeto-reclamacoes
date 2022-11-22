@@ -1,8 +1,11 @@
-from os import system
-import json
-system('./server/Scripts/activate')
+#!/usr/bin/server python
+# coding: utf-8
+
 from models.SharePointMonitor import *
 from models.ReadCSV import ReadCSV
+from os import system
+import json
+
 
 header_types = {
     # 'vertrag': 'number',
