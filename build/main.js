@@ -4,19 +4,20 @@ const { download } = require("./models/SharePoint");
 var _socketio = require('socket.io');
 
 
-const credentials = readJSON("./credentials.json");
+const settings = readJSON("./credentials.json");
 const PORT = Number(process.env.PORT) || 50001, timeout = 3600000 // -> 1h;
-let csv = read_csv(credentials["out"] + credentials["file_name"], ";");
+let csv = read_csv(settings["out"] + settings["file_name"], ";");
 
 const set_csv = () => {
     download(
-        { link: credentials["link_sharepoint"], user: credentials["email"], pass: credentials["pass"] },
-        credentials["file_path"],
-        credentials["out"],
+        { link: settings["link_sharepoint"], user: settings["email"], pass: settings["pass"] },
+        settings["file_path"],
+        settings["out"],
         () => {
-            csv = read_csv(credentials["out"] + credentials["file_name"]);
+            csv = read_csv(settings["out"] + settings["file_name"]);
             csv = withColumn(csv, 'User', '-');
             csv = renameDataColumns(csv);
+            console.log(csv);
             io.sockets.emit('send_data', csv);
         }
     );

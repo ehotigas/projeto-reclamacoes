@@ -1,5 +1,4 @@
 import { Download, IAuthOptions } from 'sp-download';
-import { ModuleResolutionKind } from 'typescript';
 
 interface SharePoint {
     link: string;
