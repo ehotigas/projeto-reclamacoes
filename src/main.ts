@@ -1,11 +1,11 @@
+const { read_csv, withColumn } = require('./models/Csv');
 const { download } = require("./models/SharePoint");
 const { readJSON } = require('./models/functions');
-const { read_csv } = require('./models/Csv');
 import { Server } from "socket.io";
 
 
 const credentials: Object = readJSON("./credentials.json");
-const PORT: number = Number(process.env.PORT) || 50001, timeout: number = 1800000;
+const PORT: number = Number(process.env.PORT) || 50001, timeout: number = 3600000 // -> 1h;
 let csv: Csv = read_csv(credentials["out"] + credentials["file_name"], ";");
 
 const set_csv = (): void => {
@@ -15,9 +15,8 @@ const set_csv = (): void => {
         credentials["out"],
         () => {
             csv = read_csv(credentials["out"] + credentials["file_name"]);
+            csv = withColumn(csv, 'User', '-');
             io.sockets.emit('send_data', csv);
-            console.log(csv);
-            
         }
     );
 

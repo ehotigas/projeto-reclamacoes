@@ -37,16 +37,16 @@ function read_csv(
 }
 
 
-// function withColumn(data: Csv, column: string, value: any, condition=false): Csv {
-//     data.header[column] = String(typeof(value));
-//     for (let i = 0; i < data.dados.length; i++) {
-//         if (condition) {
-//             if(condition(column, value)) dados.dados[i][column] = value;
-//         }
-//         else data.dados[i][column] = value;
-//     }
-//     return data;
-// }
+function withColumn(data: Csv, column: string, value: any, condition: any=false): Csv {
+    data.header[column] = String(typeof(value));
+    for (let i = 0; i < data.dados.length; i++) {
+        if (condition) {
+            if(condition(column, value)) data.dados[i][column] = value;
+        }
+        else data.dados[i][column] = value;
+    }
+    return data;
+}
 
 
 module.exports = {
