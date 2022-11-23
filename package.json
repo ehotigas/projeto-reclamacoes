@@ -1,9 +1,9 @@
 {
-  "main": "./src/main.ts",
+  "main": "./build/main.ts",
   "scripts": {
-    "start": "sucrase-node ./src/main.ts",
+    "start": "node ./build/main.js",
     "dev": "sucrase-node ./src/main.ts",
-    "build": ""
+    "build": "sucrase ./src -d ./build --transforms typescript,imports"
   },
   "dependencies": {
     "express": "^4.18.2",
