@@ -1,16 +1,24 @@
-import download from "./models/SharePoint";
+const { download } = require("./models/SharePoint");
+const { readJSON } = require('./models/functions');
+const { read_csv } = require('./models/Csv');
 import { Server } from "socket.io";
 
 
+const credentials: Object = readJSON("./credentials.json");
 const PORT: number = Number(process.env.PORT) || 50001, timeout: number = 1800000;
-let csv: Csv = read_csv("out_path", ";");
+let csv: Csv = read_csv(credentials["out"] + credentials["file_name"], ";");
 
 const set_csv = (): void => {
     download(
-        new SharePoint("link", "user", "pass"),
-        "file_path",
-        "out_path",
-        () => { csv = read_csv("out_path") }
+        { link: credentials["link_sharepoint"], user: credentials["email"], pass: credentials["pass"] },
+        credentials["file_path"],
+        credentials["out"],
+        () => {
+            csv = read_csv(credentials["out"] + credentials["file_name"]);
+            io.sockets.emit('send_data', csv);
+            console.log(csv);
+            
+        }
     );
 
     setTimeout(set_csv, timeout);

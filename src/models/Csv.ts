@@ -1,4 +1,10 @@
-const { fs } = require('fs');
+const FS = require('fs');
+
+
+interface Csv {
+    header: Object;
+    dados: object[];
+}
 
 
 function extract_data(data: string, delimiter: string): Csv {
@@ -26,7 +32,7 @@ function read_csv(
     path: string,
     delimiter: string=';'
     ): Csv {
-    let txt: string = fs.readFileSync(path, "utf-8");
+    let txt: string = FS.readFileSync(path, "utf-8");
     return extract_data(txt, delimiter);
 }
 
@@ -43,7 +49,7 @@ function read_csv(
 // }
 
 
-module.exports({
+module.exports = {
     extract_data,
-    read_csv
-});
+    read_csv,
+};

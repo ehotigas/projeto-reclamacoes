@@ -1,7 +1,14 @@
 import { Download, IAuthOptions } from 'sp-download';
+import { ModuleResolutionKind } from 'typescript';
+
+interface SharePoint {
+    link: string;
+    user: string;
+    pass: string;
+}
 
 
-export default function download(
+function download(
     sharePoint: SharePoint,
     file_path: string,
     out_path: string,
@@ -21,3 +28,6 @@ export default function download(
     });
 }
 
+module.exports = {
+    download
+}
