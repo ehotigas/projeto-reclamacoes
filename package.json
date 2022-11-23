@@ -1,5 +1,5 @@
 {
-  "main": "main.py",
+  "main": "./src/main.ts",
   "scripts": {
     "start": "sucrase-node ./src/main.ts",
     "dev": "sucrase-node ./src/main.ts",
