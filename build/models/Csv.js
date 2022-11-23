@@ -59,4 +59,6 @@ function withColumnRenamed(data, column_name, new_column_name) {
 module.exports = {
     extract_data,
     read_csv,
+    withColumn,
+    withColumnRenamed
 };

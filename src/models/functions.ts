@@ -1,4 +1,5 @@
 const fs = require('fs');
+const wCR = require('./Csv').withColumnRenamed;
 
 function readJSON(path: string): Object {
     try {
@@ -16,7 +17,7 @@ function renameDataColumns(data: Csv): Csv {
         Consumo: 'Cons (MWh)', Demanda: 'Dem (MWh)', DiasFatura: 'Dias',
         Medicao: 'Medicao (KWh)', eq1: 'Medidor'
     };
-    Object.keys(columns).forEach(element => { data = withColumnRenamed(data, element, columns[element]) });
+    Object.keys(columns).forEach(element => { data = wCR(data, element, columns[element]) });
     return data;
 }
 
