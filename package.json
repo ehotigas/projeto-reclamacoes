@@ -1,0 +1,24 @@
+{
+  "main": "main.py",
+  "scripts": {
+    "start": "sucrase-node ./src/main.ts",
+    "dev": "sucrase-node ./src/main.ts",
+    "build": ""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.5.3",
+    "sp-download": "^2.0.0"
+  },
+  "devDependencies": {
+    "sucrase": "^3.29.0",
+    "typescript": "^4.9.3"
+  },
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
