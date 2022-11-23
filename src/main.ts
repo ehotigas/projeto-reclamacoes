@@ -34,12 +34,12 @@ const io = new Server({
 
 io.on("connection", (socket: any): void => {
     io.sockets.emit('send_data', csv);
-    console.log('conectado')
+    console.log('conectado');
 });
 
 io.on('teste', (data: Object): void => {
     console.log(data);
-    console.log('evento')
+    console.log('evento');
 })
 
 
