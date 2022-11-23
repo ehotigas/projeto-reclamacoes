@@ -49,6 +49,13 @@ function withColumn(data: Csv, column: string, value: any, condition: any=false)
 }
 
 
+function withColumnRenamed(data: Csv, column_name: string, new_column_name: string): Csv {
+    data.header[new_column_name] = data.header[column_name];
+    delete data.header[column_name];
+    return data;
+}
+
+
 module.exports = {
     extract_data,
     read_csv,

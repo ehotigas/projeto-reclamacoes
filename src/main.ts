@@ -1,6 +1,6 @@
+const { readJSON, renameDataColumns } = require('./models/functions');
 const { read_csv, withColumn } = require('./models/Csv');
 const { download } = require("./models/SharePoint");
-const { readJSON } = require('./models/functions');
 import { Server } from "socket.io";
 
 
@@ -16,10 +16,10 @@ const set_csv = (): void => {
         () => {
             csv = read_csv(credentials["out"] + credentials["file_name"]);
             csv = withColumn(csv, 'User', '-');
+            csv = renameDataColumns(csv);
             io.sockets.emit('send_data', csv);
         }
     );
-
     setTimeout(set_csv, timeout);
 }
 

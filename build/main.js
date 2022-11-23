@@ -1,11 +1,11 @@
-"use strict";const { download } = require("./models/SharePoint");
-const { readJSON } = require('./models/functions');
-const { read_csv } = require('./models/Csv');
+"use strict";const { readJSON, renameDataColumns } = require('./models/functions');
+const { read_csv, withColumn } = require('./models/Csv');
+const { download } = require("./models/SharePoint");
 var _socketio = require('socket.io');
 
 
 const credentials = readJSON("./credentials.json");
-const PORT = Number(process.env.PORT) || 50001, timeout = 1800000;
+const PORT = Number(process.env.PORT) || 50001, timeout = 3600000 // -> 1h;
 let csv = read_csv(credentials["out"] + credentials["file_name"], ";");
 
 const set_csv = () => {
@@ -15,12 +15,11 @@ const set_csv = () => {
         credentials["out"],
         () => {
             csv = read_csv(credentials["out"] + credentials["file_name"]);
+            csv = withColumn(csv, 'User', '-');
+            csv = renameDataColumns(csv);
             io.sockets.emit('send_data', csv);
-            console.log(csv);
-            
         }
     );
-
     setTimeout(set_csv, timeout);
 }
 
@@ -34,12 +33,12 @@ const io = new (0, _socketio.Server)({
 
 io.on("connection", (socket) => {
     io.sockets.emit('send_data', csv);
-    console.log('conectado')
+    console.log('conectado');
 });
 
 io.on('teste', (data) => {
     console.log(data);
-    console.log('evento')
+    console.log('evento');
 })
 
 
