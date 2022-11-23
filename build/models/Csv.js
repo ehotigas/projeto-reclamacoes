@@ -52,6 +52,10 @@ function withColumn(data, column, value, condition=false) {
 function withColumnRenamed(data, column_name, new_column_name) {
     data.header[new_column_name] = data.header[column_name];
     delete data.header[column_name];
+    data.dados.forEach(element => {
+        element[new_column_name] = element[column_name];
+        delete element[column_name];
+    });
     return data;
 }
 

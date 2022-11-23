@@ -52,6 +52,12 @@ function withColumn(data: Csv, column: string, value: any, condition: any=false)
 function withColumnRenamed(data: Csv, column_name: string, new_column_name: string): Csv {
     data.header[new_column_name] = data.header[column_name];
     delete data.header[column_name];
+
+    data.dados.forEach(element => {
+        element[new_column_name] = element[column_name];
+        delete element[column_name];
+    });
+    
     return data;
 }
 
