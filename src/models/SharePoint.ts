@@ -1,5 +1,6 @@
 import { Download, IAuthOptions } from 'sp-download';
 
+
 interface SharePoint {
     link: string;
     user: string;
@@ -18,7 +19,7 @@ function download(
         username: sharePoint.user,
         password: sharePoint.pass
     };
-    console.log(sharePoint.link + file_path);
+
     const download = new Download(authContext);
     download.downloadFile(sharePoint.link + file_path, out_path)
     .then(callback)

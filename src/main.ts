@@ -1,5 +1,5 @@
-const { read_csv, withColumn, withColumnRenamed } = require('./models/Csv');
-const { readJSON, renameDataColumns } = require('./models/functions');
+const { readJSON, renameDataColumns, insertUser, removeUser } = require('./models/functions');
+const { read_csv, withColumn } = require('./models/Csv');
 const { download } = require("./models/SharePoint");
 import { Server } from "socket.io";
 
@@ -18,7 +18,7 @@ const set_csv = (): void => {
             csv = read_csv(settings["out"] + settings["file_name"]);
             csv = withColumn(csv, 'User', '-');
             csv = renameDataColumns(csv);
-            console.log(csv);
+            console.log("Data Sent");
             io.sockets.emit('send_data', csv);
         }
     );
@@ -35,13 +35,16 @@ const io = new Server({
 
 io.on("connection", (socket: any): void => {
     io.sockets.emit('send_data', csv);
-    console.log('conectado');
+    console.log(`${socket.id} conectado`);
+    socket.on('to_home', (user: string): void => {
+        removeUser(csv, user);
+        io.sockets.emit('send_data', csv);
+    });
+    socket.on('row_click', (row: RowData): void => {
+        csv = insertUser(csv, row);
+        io.sockets.emit('send_data', csv);
+    });
 });
-
-io.on('teste', (data: Object): void => {
-    console.log(data);
-    console.log('evento');
-})
 
 
 io.listen(PORT);
