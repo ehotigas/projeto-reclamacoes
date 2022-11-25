@@ -8,7 +8,7 @@ interface Csv {
 
 
 function extract_data(data: string, delimiter: string): Csv {
-    let out: Csv = { header: {  }, dados: [] };
+    let out: Csv = { header: { id: 'string' }, dados: [] };
     let data_rows: string[] =  data.split('\n'),  header: string[] = data_rows[0].split(delimiter);
     
     for (let i = 0; i < header.length; i++) {

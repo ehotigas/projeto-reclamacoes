@@ -19,6 +19,7 @@ const set_csv = () => {
             csv = withColumn(csv, 'User', '-');
             csv = renameDataColumns(csv);
             console.log("Data Sent");
+            console.log(csv.header);
             io.sockets.emit('send_data', csv);
         }
     );

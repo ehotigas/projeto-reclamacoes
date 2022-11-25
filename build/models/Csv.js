@@ -8,7 +8,7 @@
 
 
 function extract_data(data, delimiter) {
-    let out = { header: {  }, dados: [] };
+    let out = { header: { id: 'string' }, dados: [] };
     let data_rows =  data.split('\n'),  header = data_rows[0].split(delimiter);
     
     for (let i = 0; i < header.length; i++) {
