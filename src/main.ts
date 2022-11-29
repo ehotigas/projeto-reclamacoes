@@ -5,7 +5,7 @@ import { Server } from "socket.io";
 
 
 const settings: Object = readJSON("./credentials.json");
-const PORT: number = Number(process.env.PORT) || 50001, timeout: number = 3600000 // -> 1h;
+const PORT: number = Number(process.env.PORT) || 50001, timeout: number = 86400000 // -> 24h;
 let csv: Csv = read_csv(settings["out"] + settings["file_name"], ";");
 
 
@@ -19,7 +19,6 @@ const set_csv = (): void => {
             csv = withColumn(csv, 'User', '-');
             csv = renameDataColumns(csv);
             console.log("Data Sent");
-            console.log(csv.header);
             io.sockets.emit('send_data', csv);
         }
     );
