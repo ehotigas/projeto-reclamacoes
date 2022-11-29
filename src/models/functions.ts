@@ -22,9 +22,9 @@ function readJSON(path: string): Object {
 function renameDataColumns(data: Csv): Csv {
     const columns = { 
         anlage: 'Instalação', city1: 'Município', opbel: 'DocFat',
-        Consumo: 'Cons (MWh)', Demanda: 'Dem (MWh)', DiasFatura: 'Dias',
-        Medicao: 'Medicao (KWh)', eq1: 'Medidor', tariftyp: 'Tipo Tarifa',
-        total_amnt: 'Valor Fatura'
+        Consumo: 'Cons(KWh)', Demanda: 'Dem(KW)', DiasFatura: 'Dias',
+        Medicao: 'Medicao(KWh)', eq1: 'Medidor', tariftyp: 'Tipo Tarifa',
+        total_amnt: 'Valor Fatura(R$)', billing_period: 'ExercícioPeríodo'
     };
     Object.keys(columns).forEach(element => { data = wCR(data, element, columns[element]) });
     return data;
